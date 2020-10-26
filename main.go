@@ -14,13 +14,7 @@ func main() {
 	loggerConfig()
 	gin := gin.Default()
 	router.SetupRoutes(gin)
-	// gin.Static("/", "./dist")
 	gin.Use(static.Serve("/", static.LocalFile("./dist", true)))
-	// gin.Use(spa.Middleware("/", "./dist"))
-	/* 	gin.NoRoute(func(c *gin.Context) {
-		c.File("./web/dist/index.html")
-	}) */
-
 	gin.NoRoute(redirectToSPA)
 	gin.Run(":4000")
 }
